@@ -37,7 +37,19 @@ class Ball:
             self.y = 40
     def draw(self):
         self.image.draw(self.x,self.y)
+class Big_ball:
+    def __init__(self):
+        self.x, self.y = random.randint(100,700), 599
+        self.image = load_image('ball41x41.png')
 
+    def update(self):
+        if self.y > 40:
+            self.y -= random.randint(0, 10)
+        else:
+            self.y = 40
+
+    def draw(self):
+        self.image.draw(self.x, self.y)
 
 def handle_events():
     global running
@@ -54,16 +66,18 @@ def reset_world():
     global grass
     global balls
     global world
-
+    global big_balls
     running = True
     world = []
 
     grass = Grass()
     world.append(grass)
 
-    balls = [Ball() for i in range(20)]
-    world += balls
+    balls = [Ball() for i in range(10)]
+    big_balls = [Big_ball() for i in range(10)]
 
+    world += balls
+    world += big_balls
 
 def update_world():
     for o in world:
